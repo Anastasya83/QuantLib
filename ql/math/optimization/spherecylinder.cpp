@@ -97,9 +97,9 @@ namespace QuantLib {
          if (cylinderInside > 0.0) {
              topValue_ = alpha + s;
              bottomValue_ = alpha - s;
-        }
-        else
-        {
+         }
+         else
+         {
 
             bottomValue_ = alpha-s;
             Real tmp = r*r - (s *s+alpha*alpha);
@@ -116,8 +116,7 @@ namespace QuantLib {
 
             }
 
-
-        }
+         }
 
     }
 
