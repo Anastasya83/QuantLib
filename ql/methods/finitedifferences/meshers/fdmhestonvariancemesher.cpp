@@ -165,16 +165,17 @@ namespace QuantLib {
         Real mixingFactor)
      : Fdm1dMesher(size) {
 
-        const FdmHestonVarianceMesher mesher(
-            size, process, maturity, tAvgSteps, epsilon, mixingFactor);
+        ext::shared_ptr<FdmHestonVarianceMesher> mesher =
+            ext::make_shared<FdmHestonVarianceMesher>(
+                size, process, maturity, tAvgSteps, epsilon, mixingFactor);
 
         for (Size i=0; i < size; ++i) {
-            dplus_[i] = mesher.dplus(i);
-            dminus_[i] = mesher.dminus(i);
-            locations_[i] = mesher.location(i);
+            dplus_[i] = mesher->dplus(i);
+            dminus_[i] = mesher->dminus(i);
+            locations_[i] = mesher->location(i);
         }
 
-        volaEstimate_ = mesher.volaEstimate();
+        volaEstimate_ = mesher->volaEstimate();
 
         if (leverageFct != 0) {
             typedef boost::accumulators::accumulator_set<
